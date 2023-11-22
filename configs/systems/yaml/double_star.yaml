@@ -1,0 +1,18 @@
+# Двойная звезда
+- type: Star
+  R: 15
+  color: white
+  m: 1e+30
+  x: 1e+10
+  y: 0
+  v_x: 0
+  v_y: 0e+0
+- type: Star
+  R: 50
+  color: cyan
+  m: 2e+30
+  x: -1e+10
+  y: 0
+  v_x: 1e+4
+  v_y: 0e+0
+
