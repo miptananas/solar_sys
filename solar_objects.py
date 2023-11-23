@@ -8,9 +8,6 @@ class SpaceObject:
     а также визуальный радиус объекта в пикселах и её цвет.
     """
 
-    # TODO: Дополнить документацию
-    # TODO: Добавить возможность инициализации параметров через __init__
-
     def __init__(self, type: str, R: float, color: str, m: float, x: float, y: float, v_x: float, v_y: float):
         self.type = type  # Признак объекта star или planet
         self.m = m  # Масса объекта

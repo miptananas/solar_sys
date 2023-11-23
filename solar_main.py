@@ -18,12 +18,13 @@ def execution(delta, world: World) -> None:
     Цикличность выполнения зависит от значения переменной perform_execution в объекте типа World.
     При perform_execution == True функция запрашивает вызов самой себя по таймеру через от 1 мс до 100 мс.
     """
-    recalculate_space_objects_positions(world.space_objects, world.scale_factor, delta)
-    world.model_time += delta
-    if check_system(world.space_objects):
-        world.graph_time = np.append(world.graph_time, world.model_time)
-        world.graph_speed = np.append(world.graph_speed, calculate_speed(world.space_objects))
-        world.graph_S = np.append(world.graph_S, calculate_distance(world.space_objects))
+    if world.perform_execution:
+        recalculate_space_objects_positions(world.space_objects, world.scale_factor, delta)
+        world.model_time += delta
+        if check_system(world.space_objects):
+            world.graph_time = np.append(world.graph_time, world.model_time)
+            world.graph_speed = np.append(world.graph_speed, calculate_speed(world.space_objects))
+            world.graph_S = np.append(world.graph_S, calculate_distance(world.space_objects))
 
 
 def start_execution(world: World) -> None:
@@ -92,11 +93,11 @@ def main():
     world.perform_execution = True
 
     while world.alive:
-        execution(10000, world)
+        execution(menu.get_slider_value() * 100, world)
         drawer.update(world.drawable_objects)
         handle_events(pg.event.get(), world)
         drawer.display_update()
-        time.sleep(1.0 / 10)
+        time.sleep(1.0 / menu.get_slider_value() / 100)
 
     write_space_objects_data_to_yaml("output.txt", world.space_objects)
     if check_system(world.space_objects):
