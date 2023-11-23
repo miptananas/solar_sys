@@ -11,6 +11,7 @@ from pygame_widgets.textbox import TextBox
 from typing import Callable
 
 from solar_objects import SpaceObject
+from typing import Tuple
 
 
 """Модуль визуализации.
@@ -169,7 +170,7 @@ class Menu:
         text: str = "Hello",
         font_size: int = 25,
         margin: int = 20,
-        inactive_color: tuple[int, int, int] = (200, 50, 0),
+        inactive_color: Tuple[int, int, int] = (200, 50, 0),
         hover_color=(150, 0, 0),
         pressed_color=(0, 200, 20),
         radius: int = 20,

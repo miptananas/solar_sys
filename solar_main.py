@@ -92,12 +92,11 @@ def main():
     world.perform_execution = True
 
     while world.alive:
-        execution(1, world)
+        execution(10000, world)
         drawer.update(world.drawable_objects)
         handle_events(pg.event.get(), world)
         drawer.display_update()
         time.sleep(1.0 / 10)
-        print(world)  # Отладочный вывод TODO: Убрать
 
     write_space_objects_data_to_yaml("output.txt", world.space_objects)
     if check_system(world.space_objects):

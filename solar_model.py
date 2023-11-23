@@ -23,7 +23,8 @@ def calculate_force(body: SpaceObject, space_objects: List[SpaceObject]) -> None
             continue  # тело не действует гравитационной силой на само себя!
         r = ((body.x - obj.x) ** 2 + (body.y - obj.y) ** 2) ** 0.5
         r = max(r, body.R)  # FIXME: обработка аномалий при прохождении одного тела сквозь другое
-        pass  # FIXME: Взаимодействие объектов
+        body.Fx += -gravitational_constant * body.m * obj.m / r ** 3 * (body.x - obj.x)
+        body.Fy += -gravitational_constant * body.m * obj.m / r ** 3 * (body.y - obj.y)
 
 
 def move_space_object(body: SpaceObject, dt: int) -> None:
@@ -39,12 +40,13 @@ def move_space_object(body: SpaceObject, dt: int) -> None:
 
     **dt** - шаг по времени.
     """
-    old = body.x  # FIXME: Вывести формулы для ускорения, скоростей и координат
     ax = body.Fx / body.m
-    body.x += 24
-    ay = body.Fy * body.m
-    body.y = 42
-    body.Vy += 4 * dt
+    body.Vx += ax * dt
+    body.x += body.Vx * dt
+
+    ay = body.Fy / body.m
+    body.Vy += ay * dt
+    body.y += body.Vy * dt
 
 
 def hit_test_space_objects(body: SpaceObject, space_objects: List[SpaceObject], scale_factor: float) -> None:
